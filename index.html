@@ -6,33 +6,41 @@
 <title>르홈 커튼 설치 리뷰 · 거실 작은방1 작은방2 안방 알파룸</title>
 <style>
 *{box-sizing:border-box}
-:root{--bg:#f5f2ee;--card:#fff;--ink:#292521;--muted:#786f68;--line:#e4ddd6;--brand:#8a6b55;--danger:#b54b42;--soft:#f7f0ea}
+:root{--bg:#f5f2ee;--card:#fff;--ink:#292521;--muted:#786f68;--line:#e4ddd6;--brand:#8a6b55;--danger:#b54b42;--soft:#f7f0ea;--blue:#2563eb}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;line-height:1.65;word-break:keep-all}
 .wrap{max-width:980px;margin:auto;padding:12px 10px 90px}
 .hero{background:linear-gradient(135deg,#725643,#a78369);color:#fff;border-radius:22px;padding:26px 20px;margin-bottom:10px}
 .hero h1{margin:4px 0 8px;font-size:28px}.hero p{margin:0;font-size:14px;opacity:.94}
 .toolbar{position:sticky;top:0;z-index:30;display:flex;gap:8px;overflow:auto;padding:9px 0;background:rgba(245,242,238,.95);backdrop-filter:blur(8px)}
 button,label.filebtn{border:0;border-radius:11px;padding:10px 13px;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
-.primary{background:var(--brand);color:#fff}.dark{background:#292521;color:#fff}.ghost{background:#fff;border:1px solid var(--line)}.danger{background:#fff2f0;color:var(--danger);border:1px solid #efcec9}
+.primary{background:var(--brand);color:#fff}.dark{background:#292521;color:#fff}.ghost{background:#fff;border:1px solid var(--line)}.orange{background:#d97706;color:#fff}.danger{background:#fff2f0;color:var(--danger);border:1px solid #efcec9}
 .card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:17px;margin:12px 0}
 .card h2{font-size:20px;margin:0 0 12px}.hint{font-size:12px;color:var(--muted);margin-top:-5px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.full{grid-column:1/-1}
 .field{display:flex;flex-direction:column;gap:5px}.field label{font-size:13px;font-weight:800}
 input,select,textarea{width:100%;border:1px solid #ddd6cf;border-radius:10px;padding:10px 11px;font:inherit;background:#fff}
 textarea{min-height:90px;resize:vertical}
+.voice-ref{margin:6px 0 7px;padding:9px 11px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;color:#64748b;font-size:12px}.voice-ref b{color:#475569}
 .space-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}.space{padding:10px;background:var(--soft);border:1px solid #e1d4c9;border-radius:11px;text-align:center;font-size:13px;font-weight:800}
 .progress{display:flex;align-items:center;gap:10px}.bar{flex:1;height:10px;background:#ece5df;border-radius:999px;overflow:hidden}.fill{height:100%;width:0;background:var(--brand)}
-.shot-group{margin-top:18px}.shot-group h3{font-size:17px;margin:0 0 9px}
-.shot-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}.shot.done{border-color:#9fc5ae}
-.shot-head{padding:10px 11px;font-weight:800;background:#fffdfa;border-bottom:1px solid var(--line)}
+.shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;margin:11px 0;transition:.15s}.shot.done{border-color:#9fc5ae}
+.shot.dragging{opacity:.55;transform:scale(.99);box-shadow:0 10px 30px rgba(15,23,42,.12)}
+.shot.drag-over{outline:2px solid var(--blue);outline-offset:2px}
+.shot-head{padding:10px 11px;font-weight:800;background:#fffdfa;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.drag-handle{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:30px;border-radius:9px;background:#eef2f7;color:#475569;font-weight:900;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none}
+.drag-tip{font-size:11px;color:#94a3b8;margin-left:auto}.group-badge{font-size:11px;background:#f3ede7;border:1px solid #e2d8cf;border-radius:999px;padding:3px 7px;color:#715d4d}
 .photo{min-height:200px;background:#f1ece8;display:grid;place-items:center;text-align:center;color:var(--muted);padding:15px}
-.photo img{width:100%;height:100%;max-height:360px;object-fit:contain}.actions{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;padding:9px}
-.actions label,.actions button{border-radius:9px;padding:8px;font-size:12px;font-weight:800;text-align:center;cursor:pointer}.actions label{border:1px solid var(--line);background:#fff}.actions button{border:1px solid #efceca;background:#fff4f2;color:var(--danger)}
-.shot textarea{border-radius:0;border-width:1px 0 0;min-height:70px}
+.photo img{width:100%;height:100%;max-height:420px;object-fit:contain}
+.actions{display:flex;gap:6px;flex-wrap:wrap;padding:9px}
+.actions label,.actions button{border-radius:9px;padding:8px;font-size:12px;font-weight:800;text-align:center;cursor:pointer;margin:0}
+.actions label{border:1px solid var(--line);background:#fff}.actions button{border:1px solid #efceca;background:#fff4f2;color:var(--danger)}
+.shot-body{padding:0 10px 10px}.shot textarea{min-height:80px}
+.insert-shot{display:flex;align-items:center;gap:10px;margin:8px 0 12px}.insert-shot:before,.insert-shot:after{content:"";height:1px;background:#dbe1e7;flex:1}.insert-shot button{border:1px dashed #b8c1cc;background:#fff;color:#475569;border-radius:999px;padding:8px 14px;font-weight:800;font-size:12px;white-space:nowrap}
 .draft{min-height:500px;line-height:1.8}.preview{white-space:pre-wrap;background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:14px;min-height:120px}
 .status{font-size:12px;font-weight:800;color:#6d5241;min-height:20px}
-@media(max-width:720px){.grid,.shot-grid{grid-template-columns:1fr}.full{grid-column:auto}.space-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:24px}.actions{grid-template-columns:1fr 1fr}.actions button{grid-column:1/-1}}
+.note{background:#fff8ef;border:1px solid #efd8b7;color:#785a2c;padding:10px 12px;border-radius:12px;font-size:13px;margin-top:10px}
+.hidden{display:none}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.space-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:24px}.drag-tip{display:none}}
 </style>
 </head>
 <body>
@@ -41,6 +49,7 @@ textarea{min-height:90px;resize:vertical}
 <small>LEHOME CURTAIN INSTALLATION REVIEW</small>
 <h1>대구 수성구 만촌동 르홈 · 우리집 커튼 설치 리뷰</h1>
 <p>거실, 작은방1, 작은방2, 안방, 알파룸까지 총 5개 공간의 커튼 설치 전후와 시공 디테일을 기록하는 현장용 index입니다.</p>
+<div class="note">📦 사진 포함 HTML 저장 시 사진을 약 1/5 용량으로 압축해 한 파일에 포함합니다. 사진 제외 HTML 저장도 별도로 지원합니다.</div>
 </header>
 
 <div class="toolbar">
@@ -48,7 +57,8 @@ textarea{min-height:90px;resize:vertical}
 <button class="dark" id="blogBtn">N 자연스러운 설치 후기</button>
 <button class="ghost" id="copyBtn">📋 글 복사</button>
 <button class="ghost" id="saveBtn">💾 저장</button>
-<button class="ghost" id="exportBtn">📄 사진 포함 HTML 저장</button>
+<button class="orange" id="exportBtn">📦 사진 포함 HTML 저장 (1/5)</button>
+<button class="ghost" id="exportNoPhotoBtn">📄 사진 제외 HTML 저장</button>
 <button class="danger" id="resetBtn">전체 초기화</button>
 </div>
 <div class="status" id="status"></div>
@@ -60,31 +70,30 @@ textarea{min-height:90px;resize:vertical}
 <div class="field"><label>지역</label><input id="area" value="대구 수성구 만촌동"></div>
 <div class="field"><label>설치일</label><input id="date" type="date"></div>
 <div class="field"><label>설치 형태</label><select id="type"><option>커튼</option><option>커튼 + 쉬어커튼</option><option>커튼 + 블라인드</option><option>기타</option></select></div>
-<div class="field full"><label>원단 / 색상</label><input id="fabric" placeholder="예: 거실 차르르 화이트, 안방 암막 베이지"></div>
-<div class="field full"><label>견적 / 결제 메모</label><input id="price" placeholder="예: 총 견적, 계약금, 잔금, 추가금"></div>
+<div class="field full"><label>원단 / 색상</label><div class="voice-ref"><b>말하기 참고:</b> 거실·작은방1·작은방2·안방·알파룸 각각 어떤 색과 원단을 선택했는지, 왜 선택했는지 말해보세요.</div><input id="fabric" placeholder="예: 거실 차르르 화이트, 안방 암막 베이지"></div>
+<div class="field full"><label>견적 / 결제 메모</label><div class="voice-ref"><b>말하기 참고:</b> 총 견적, 계약금·잔금, 공간별 추가금, 예상과 실제 비용 차이를 말해보세요.</div><input id="price" placeholder="예: 총 견적, 계약금, 잔금, 추가금"></div>
 </div>
-<div class="space-grid">
-<div class="space">거실</div><div class="space">작은방 1</div><div class="space">작은방 2</div><div class="space">안방</div><div class="space">알파룸</div>
-</div>
+<div class="space-grid"><div class="space">거실</div><div class="space">작은방 1</div><div class="space">작은방 2</div><div class="space">안방</div><div class="space">알파룸</div></div>
 </section>
 
 <section class="card">
 <h2>2. 상담·설치 메모</h2>
 <div class="grid">
-<div class="field full"><label>상담 · 실측</label><textarea id="consult" placeholder="예: 공간별 채광과 가구 색을 보고 원단 추천, 길이와 주름 배수 설명"></textarea></div>
-<div class="field"><label>좋았던 점</label><textarea id="good" placeholder="예: 공간별 추천이 좋았음, 설치 깔끔"></textarea></div>
-<div class="field"><label>아쉬웠던 점</label><textarea id="bad" placeholder="예: 색감 차이, 일정, 추가금 등"></textarea></div>
-<div class="field"><label>기사님 · 업체 응대</label><textarea id="service" placeholder="예: 시간 준수, 설명 친절, 마무리 안내"></textarea></div>
-<div class="field"><label>설치 완성도</label><textarea id="finish" placeholder="예: 주름 균일, 레일 깔끔, 하단 길이 일정"></textarea></div>
-<div class="field full"><label>우리집 분위기 변화 · 총평</label><textarea id="personal" placeholder="예: 커튼 설치 후 집이 훨씬 따뜻하고 완성된 느낌"></textarea></div>
+<div class="field full"><label>상담 · 실측</label><div class="voice-ref"><b>말하기 참고:</b> 방문 실측 과정, 공간별 채광 확인, 원단·색상 추천 이유, 주름 배수와 길이 설명이 충분했는지 말해보세요.</div><textarea id="consult" placeholder="상담과 실측 후기를 입력하세요"></textarea></div>
+<div class="field"><label>좋았던 점</label><div class="voice-ref"><b>말하기 참고:</b> 추천 센스, 원단 선택 폭, 설치 속도, 정리 상태, 기대보다 좋았던 부분을 말해보세요.</div><textarea id="good" placeholder="좋았던 점을 입력하세요"></textarea></div>
+<div class="field"><label>아쉬웠던 점</label><div class="voice-ref"><b>말하기 참고:</b> 색감 차이, 일정, 추가금, 커뮤니케이션, 설치 후 발견한 아쉬움을 말해보세요.</div><textarea id="bad" placeholder="아쉬웠던 점을 입력하세요"></textarea></div>
+<div class="field"><label>기사님 · 업체 응대</label><div class="voice-ref"><b>말하기 참고:</b> 시간 준수, 설명의 친절도, 설치 중 질문 대응, 마무리 안내를 말해보세요.</div><textarea id="service" placeholder="업체 응대를 입력하세요"></textarea></div>
+<div class="field"><label>설치 완성도</label><div class="voice-ref"><b>말하기 참고:</b> 레일 수평, 주름 균일성, 커튼 하단 길이, 좌우 대칭, 원단 마감 상태를 말해보세요.</div><textarea id="finish" placeholder="설치 완성도를 입력하세요"></textarea></div>
+<div class="field full"><label>우리집 분위기 변화 · 총평</label><div class="voice-ref"><b>말하기 참고:</b> 설치 전과 비교해 공간이 얼마나 따뜻해졌는지, 넓어 보이는지, 가장 마음에 든 공간과 재선택 의사를 말해보세요.</div><textarea id="personal" placeholder="전체 총평을 입력하세요"></textarea></div>
 </div>
 </section>
 
 <section class="card">
-<h2>3. 공간별 사진 촬영</h2>
-<p class="hint">각 공간을 설치 전 → 완성 원경 → 원단/주름 → 채광 또는 암막 순서로 기록합니다.</p>
+<h2>3. 공간별 사진 촬영 + 사진별 음성메모</h2>
+<p class="hint">각 사진 항목 상단의 ☰를 끌어 순서를 바꿀 수 있고, 각 항목 사이의 + 버튼으로 원하는 위치에 사진 항목을 추가할 수 있습니다.</p>
 <div class="progress"><strong id="progressText">0/0</strong><div class="bar"><div class="fill" id="fill"></div></div></div>
-<div id="groups"></div>
+<div id="shots"></div>
+<button class="ghost" style="width:100%" id="addBottomBtn">＋ 맨 아래에 사진 항목 추가</button>
 </section>
 
 <section class="card">
@@ -100,70 +109,91 @@ textarea{min-height:90px;resize:vertical}
 
 <script>
 (()=>{
-const KEY='lehome_curtain_5rooms_v2';
+const KEY='lehome_curtain_5rooms_v4';
 const $=id=>document.getElementById(id);
-const groups=[
-['A. 공통 설치 과정',[
-['COMMON1','설치 전 집 전체','커튼 설치 전 집 전체 분위기'],
-['COMMON2','원단 · 컬러 확인','실제 설치할 원단과 색상'],
-['COMMON3','레일 · 브라켓 설치','레일과 브라켓 시공 과정'],
-['COMMON4','기사님 설치 과정','커튼 걸기, 길이와 주름 맞춤']]],
-['B. 거실',[
-['L1','거실 설치 전','창 전체와 가구가 보이게'],
-['L2','거실 완성 원경','거실 전체 인테리어와 함께'],
-['L3','거실 원단 · 주름','질감과 주름 간격'],
-['L4','거실 자연광','낮에 빛이 들어오는 모습'],
-['L5','거실 열고 닫은 비교','개방감과 닫았을 때 분위기']]],
-['C. 작은방 1',[
-['R11','작은방1 설치 전','창과 방 전체'],
-['R12','작은방1 완성','방 전체와 커튼'],
-['R13','작은방1 원단 디테일','주름과 하단 길이'],
-['R14','작은방1 채광','닫았을 때 밝기']]],
-['D. 작은방 2',[
-['R21','작은방2 설치 전','창과 방 전체'],
-['R22','작은방2 완성','방 전체와 커튼'],
-['R23','작은방2 원단 디테일','주름과 하단 길이'],
-['R24','작은방2 채광','닫았을 때 빛 조절']]],
-['E. 안방',[
-['M1','안방 설치 전','창과 침실 분위기'],
-['M2','안방 완성 원경','침대와 커튼이 함께 보이게'],
-['M3','안방 암막 확인','낮에 닫아 빛 차단 확인'],
-['M4','안방 원단 · 주름','암막 원단과 마감'],
-['M5','안방 열린 모습','열었을 때 채광']]],
-['F. 알파룸',[
-['A1','알파룸 설치 전','공간 용도와 창'],
-['A2','알파룸 완성','공간 전체와 커튼'],
-['A3','알파룸 원단 디테일','주름과 질감'],
-['A4','알파룸 채광','빛 조절 정도']]],
-['G. 최종 마무리',[
-['F1','설치 전후 비교','같은 구도로 Before / After'],
-['F2','상단 레일 디테일','레일과 상단 주름'],
-['F3','하단 길이 디테일','바닥과 커튼 끝단 간격'],
-['F4','우리집 최종 분위기','가장 마음에 드는 완성 사진']]]
+const defaults=[
+['A. 공통 설치 과정','설치 전 집 전체','커튼 설치 전 집 전체 분위기','커튼 설치 전 집 전체가 어떤 느낌인지, 창 크기와 기존 인테리어 분위기를 말해보세요.'],
+['A. 공통 설치 과정','원단 · 컬러 확인','실제 설치할 원단과 색상','원단 촉감, 실제 색감, 샘플과 집에서 보는 색의 차이를 말해보세요.'],
+['A. 공통 설치 과정','레일 · 브라켓 설치','레일과 브라켓 시공 과정','레일 설치 위치, 천장과의 간격, 수평과 마감이 깔끔한지 말해보세요.'],
+['A. 공통 설치 과정','기사님 설치 과정','커튼 걸기, 길이와 주름 맞춤','설치 과정이 빠르고 깔끔한지, 길이와 주름을 어떻게 맞추는지 말해보세요.'],
+['B. 거실','거실 설치 전','창 전체와 가구가 보이게','거실 창 크기, 채광, 가구와 벽 색을 포함한 설치 전 분위기를 말해보세요.'],
+['B. 거실','거실 완성 원경','거실 전체 인테리어와 함께','커튼 설치 후 거실이 얼마나 부드럽고 정돈돼 보이는지 말해보세요.'],
+['B. 거실','거실 원단 · 주름','질감과 주름 간격','원단 질감, 주름 간격, 비침 정도와 고급스러운 느낌을 말해보세요.'],
+['B. 거실','거실 자연광','낮에 빛이 들어오는 모습','자연광이 원단을 통과할 때 밝기와 색감이 어떤지 말해보세요.'],
+['B. 거실','거실 열고 닫은 비교','개방감과 닫았을 때 분위기','커튼을 열었을 때와 닫았을 때 공간감과 프라이버시 차이를 말해보세요.'],
+['C. 작은방 1','작은방1 설치 전','창과 방 전체','방의 용도와 기존 채광, 가구 색을 말해보세요.'],
+['C. 작은방 1','작은방1 완성','방 전체와 커튼','설치 후 방의 분위기와 선택한 색이 잘 어울리는지 말해보세요.'],
+['C. 작은방 1','작은방1 원단 디테일','주름과 하단 길이','주름, 원단 마감, 바닥과 하단 간격을 말해보세요.'],
+['C. 작은방 1','작은방1 채광','닫았을 때 밝기','닫았을 때 밝기와 비침 정도를 말해보세요.'],
+['D. 작은방 2','작은방2 설치 전','창과 방 전체','작은방2의 용도와 설치 전 분위기를 말해보세요.'],
+['D. 작은방 2','작은방2 완성','방 전체와 커튼','커튼 설치 후 방이 어떻게 달라졌는지 말해보세요.'],
+['D. 작은방 2','작은방2 원단 디테일','주름과 하단 길이','원단 질감과 주름, 하단 길이를 말해보세요.'],
+['D. 작은방 2','작은방2 채광','닫았을 때 빛 조절','빛 조절과 프라이버시가 어느 정도인지 말해보세요.'],
+['E. 안방','안방 설치 전','창과 침실 분위기','침실의 채광과 암막이 필요한 이유를 말해보세요.'],
+['E. 안방','안방 완성 원경','침대와 커튼이 함께 보이게','침대·벽·가구와 커튼 색 조합, 아늑함을 말해보세요.'],
+['E. 안방','안방 암막 확인','낮에 닫아 빛 차단 확인','낮에 닫았을 때 실제 암막 정도와 수면에 도움이 될지 말해보세요.'],
+['E. 안방','안방 원단 · 주름','암막 원단과 마감','암막 원단 두께, 촉감, 주름과 마감을 말해보세요.'],
+['E. 안방','안방 열린 모습','열었을 때 채광','커튼을 열었을 때 채광과 개방감을 말해보세요.'],
+['F. 알파룸','알파룸 설치 전','공간 용도와 창','알파룸의 용도, 창 위치, 설치 전 허전한 느낌을 말해보세요.'],
+['F. 알파룸','알파룸 완성','공간 전체와 커튼','작은 공간에 커튼이 들어간 뒤 완성도가 어떻게 달라졌는지 말해보세요.'],
+['F. 알파룸','알파룸 원단 디테일','주름과 질감','원단 질감, 색, 주름이 공간과 잘 어울리는지 말해보세요.'],
+['F. 알파룸','알파룸 채광','빛 조절 정도','알파룸 용도에 맞게 빛이 잘 조절되는지 말해보세요.'],
+['G. 최종 마무리','설치 전후 비교','같은 구도로 Before / After','같은 구도로 비교했을 때 가장 크게 달라진 점을 말해보세요.'],
+['G. 최종 마무리','상단 레일 디테일','레일과 상단 주름','상단 레일이 깔끔하게 숨겨지는지, 주름 시작점이 일정한지 말해보세요.'],
+['G. 최종 마무리','하단 길이 디테일','바닥과 커튼 끝단 간격','바닥과 커튼 끝단 간격이 적당한지, 끌리거나 뜨지 않는지 말해보세요.'],
+['G. 최종 마무리','우리집 최종 분위기','가장 마음에 드는 완성 사진','5개 공간 중 가장 마음에 드는 공간과 전체 만족도를 말해보세요.']
 ];
-let data={photos:{},memos:{}};
 
-function allShots(){return groups.flatMap(g=>g[1])}
-function save(){data.fields={};document.querySelectorAll('input[id],select[id],textarea[id]').forEach(e=>data.fields[e.id]=e.value);localStorage.setItem(KEY,JSON.stringify(data));status('저장했습니다.')}
-function load(){try{data=JSON.parse(localStorage.getItem(KEY)||'{}');data.photos=data.photos||{};data.memos=data.memos||{};Object.entries(data.fields||{}).forEach(([k,v])=>{if($(k))$(k).value=v})}catch{data={photos:{},memos:{}}}}
+let data={fields:{},shots:[]},dragId=null;
+
+function uid(){return Math.random().toString(36).slice(2,9)}
+function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function makeDefaultShots(){return defaults.map(x=>({id:uid(),group:x[0],title:x[1],hint:x[2],guide:x[3],memo:'',img:''}))}
+function newShot(){return {id:uid(),group:'추가 사진',title:'추가 사진',hint:'필요한 장면',guide:'사진에 보이는 것 → 설치 상태 → 실제 느낀 점 → 블로그에 남길 포인트 순서로 말해보세요.',memo:'',img:''}}
 function status(t){$('status').textContent=t;clearTimeout(status.x);status.x=setTimeout(()=>$('status').textContent='',2200)}
-function compress(f){return new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>{let i=new Image();i.onload=()=>{let w=i.width,h=i.height,m=1500;if(w>m||h>m){let k=Math.min(m/w,m/h);w*=k;h*=k}let c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(i,0,0,w,h);res(c.toDataURL('image/jpeg',.82))};i.src=r.result};r.onerror=rej;r.readAsDataURL(f)})}
+function collectFields(){const o={};document.querySelectorAll('input[id],select[id],textarea[id]').forEach(e=>{if(!['draft'].includes(e.id))o[e.id]=e.value});o.draft=$('draft').value;return o}
+function save(){data.fields=collectFields();try{localStorage.setItem(KEY,JSON.stringify(data));status('자동저장 완료 ✓')}catch(e){status('저장 공간이 부족할 수 있습니다.')}}
+function load(){try{const old=JSON.parse(localStorage.getItem(KEY)||'null');if(old)data=old}catch(e){};data.fields=data.fields||{};data.shots=data.shots||[];if(!data.shots.length)data.shots=makeDefaultShots();Object.entries(data.fields).forEach(([k,v])=>{if($(k))$(k).value=v})}
 function render(){
- let box=$('groups');box.innerHTML='';
- groups.forEach(g=>{let sec=document.createElement('div');sec.className='shot-group';sec.innerHTML='<h3>'+g[0]+'</h3><div class="shot-grid"></div>';let grid=sec.querySelector('.shot-grid');
- g[1].forEach(s=>{let d=document.createElement('div');d.className='shot'+(data.photos[s[0]]?' done':'');d.innerHTML=`<div class="shot-head">${s[1]}</div><div class="photo">${data.photos[s[0]]?`<img src="${data.photos[s[0]]}">`:`<div>🪟<br><strong>${s[1]}</strong><br><small>${s[2]}</small></div>`}</div><div class="actions"><label>📷 촬영<input hidden type="file" accept="image/*" capture="environment"></label><label>🖼 보관함<input hidden type="file" accept="image/*"></label><button>삭제</button></div><textarea placeholder="사진 메모: ${s[2]}">${data.memos[s[0]]||''}</textarea>`;
- d.querySelectorAll('input[type=file]').forEach(inp=>inp.onchange=async()=>{let f=inp.files?.[0];if(!f)return;data.photos[s[0]]=await compress(f);save();render()});
- d.querySelector('button').onclick=()=>{delete data.photos[s[0]];save();render()};
- d.querySelector('textarea').oninput=e=>{data.memos[s[0]]=e.target.value;save();update()};
- grid.appendChild(d)});
- box.appendChild(sec)});
- update()
+ const box=$('shots');box.innerHTML='';
+ data.shots.forEach((s,i)=>{
+  const el=document.createElement('div');el.className='shot'+(s.img?' done':'');el.dataset.id=s.id;el.draggable=true;
+  el.innerHTML=`<div class="shot-head"><span class="drag-handle" title="드래그해서 순서 변경">☰</span><span>${i+1}. ${esc(s.title)}</span><span class="group-badge">${esc(s.group)}</span><span class="drag-tip">끌어서 이동</span></div>
+  <div class="photo">${s.img?`<img src="${s.img}" alt="${esc(s.title)}">`:`<div>🪟<br><strong>${esc(s.title)}</strong><br><small>${esc(s.hint)}</small></div>`}</div>
+  <div class="actions"><label>📷 촬영<input hidden type="file" accept="image/*" capture="environment"></label><label>🖼 보관함<input hidden type="file" accept="image/*"></label><button type="button" data-delphoto>사진삭제</button><button type="button" data-delshot>항목삭제</button></div>
+  <div class="shot-body"><label style="font-size:12px;font-weight:800">사진별 코멘트</label><div class="voice-ref"><b>말하기 참고:</b> ${esc(s.guide)}</div><textarea placeholder="사진별 코멘트를 입력하세요">${esc(s.memo||'')}</textarea></div>`;
+  el.querySelectorAll('input[type=file]').forEach(inp=>inp.onchange=async()=>{const f=inp.files?.[0];if(!f)return;status('사진 불러오는 중…');s.img=await fileToDataURL(f);render();save()});
+  el.querySelector('[data-delphoto]').onclick=()=>{s.img='';render();save()};
+  el.querySelector('[data-delshot]').onclick=()=>{if(confirm('이 사진 항목을 삭제할까요?')){data.shots=data.shots.filter(x=>x.id!==s.id);render();save()}};
+  el.querySelector('textarea').oninput=e=>{s.memo=e.target.value;save()};
+  box.appendChild(el);
+  const ins=document.createElement('div');ins.className='insert-shot';ins.innerHTML=`<button type="button">＋ 여기 사이에 사진 항목 추가</button>`;ins.querySelector('button').onclick=()=>{data.shots.splice(i+1,0,newShot());render();save()};box.appendChild(ins);
+ });
+ bindDrag();update();
 }
-function update(){let all=allShots(),done=all.filter(s=>data.photos[s[0]]).length;$('progressText').textContent=`${done}/${all.length}`;$('fill').style.width=(done/all.length*100)+'%'}
-function photoMemo(){return groups.map(g=>{let a=g[1].map(s=>data.memos[s[0]]?`- ${s[1]}: ${data.memos[s[0]]}`:'').filter(Boolean);return a.length?g[0]+'\n'+a.join('\n'):''}).filter(Boolean).join('\n\n')}
-function collect(){let o={};document.querySelectorAll('input[id],select[id],textarea[id]').forEach(e=>o[e.id]=e.value);return o}
+function bindDrag(){
+ document.querySelectorAll('#shots .shot').forEach(el=>{
+  el.addEventListener('dragstart',e=>{dragId=el.dataset.id;el.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',dragId)});
+  el.addEventListener('dragend',()=>{dragId=null;document.querySelectorAll('#shots .shot').forEach(x=>x.classList.remove('dragging','drag-over'))});
+  el.addEventListener('dragover',e=>{e.preventDefault();if(el.dataset.id!==dragId)el.classList.add('drag-over')});
+  el.addEventListener('dragleave',()=>el.classList.remove('drag-over'));
+  el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('drag-over');moveBefore(dragId||e.dataTransfer.getData('text/plain'),el.dataset.id)});
+ });
+ document.querySelectorAll('#shots .drag-handle').forEach(handle=>{
+  const source=handle.closest('.shot');let active=false,ghost=null,last=null;
+  handle.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;active=true;dragId=source.dataset.id;source.classList.add('dragging');handle.setPointerCapture?.(e.pointerId);ghost=source.cloneNode(true);Object.assign(ghost.style,{position:'fixed',left:'12px',right:'12px',top:(e.clientY-35)+'px',zIndex:9999,pointerEvents:'none',opacity:.85,maxHeight:'120px',overflow:'hidden'});document.body.appendChild(ghost);e.preventDefault()});
+  handle.addEventListener('pointermove',e=>{if(!active)return;if(ghost)ghost.style.top=(e.clientY-35)+'px';const t=document.elementFromPoint(e.clientX,e.clientY)?.closest?.('.shot');document.querySelectorAll('#shots .shot').forEach(x=>x.classList.remove('drag-over'));if(t&&t.dataset.id!==dragId){t.classList.add('drag-over');last=t.dataset.id}e.preventDefault()});
+  const finish=e=>{if(!active)return;active=false;try{handle.releasePointerCapture?.(e.pointerId)}catch(_){}source.classList.remove('dragging');document.querySelectorAll('#shots .shot').forEach(x=>x.classList.remove('drag-over'));ghost?.remove();ghost=null;if(last)moveBefore(dragId,last);dragId=null;last=null};
+  handle.addEventListener('pointerup',finish);handle.addEventListener('pointercancel',finish);
+ });
+}
+function moveBefore(fromId,toId){if(!fromId||!toId||fromId===toId)return;const fi=data.shots.findIndex(x=>x.id===fromId);if(fi<0)return;const [item]=data.shots.splice(fi,1);const ti=data.shots.findIndex(x=>x.id===toId);data.shots.splice(ti<0?data.shots.length:ti,0,item);render();save()}
+function update(){const done=data.shots.filter(s=>s.img).length,total=data.shots.length;$('progressText').textContent=`${done}/${total}`;$('fill').style.width=(total?done/total*100:0)+'%'}
+function fileToDataURL(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)})}
+function photoMemo(){return data.shots.filter(s=>s.memo?.trim()).map((s,i)=>`- ${i+1}. ${s.title}: ${s.memo.trim()}`).join('\n')}
+function collect(){return {...collectFields()}}
 function setDraft(t){$('draft').value=t;$('preview').textContent=t;save()}
-$('recordBtn').onclick=()=>{let d=collect();setDraft(`[르홈 커튼 설치 기록]
+$('recordBtn').onclick=()=>{const d=collect();setDraft(`[르홈 커튼 설치 기록]
 
 업체: ${d.store}
 지역: ${d.area}
@@ -192,32 +222,44 @@ ${d.finish||'-'}
 ${d.personal||'-'}
 
 [공간별 사진 메모]
-${photoMemo()||'사진 메모 없음'}`)}
-$('blogBtn').onclick=()=>{let d=collect();setDraft(`새집 커튼 설치를 위해 대구 수성구 만촌동 르홈에서 거실, 작은방1, 작은방2, 안방, 알파룸까지 총 5개 공간 시공을 진행했습니다.
+${photoMemo()||'사진 메모 없음'}`)};
+$('blogBtn').onclick=()=>{const d=collect();setDraft(`새집 커튼 설치를 위해 대구 수성구 만촌동 르홈에서 거실, 작은방1, 작은방2, 안방, 알파룸까지 총 5개 공간 시공을 진행했습니다.
 
 처음 상담과 실측에서는 ${d.consult||'각 공간의 창 크기와 채광, 사용할 공간의 용도에 맞춰 원단과 색상을 확인했습니다.'}
 
-거실은 커튼 설치 전과 후의 변화가 가장 크게 느껴진 공간이었습니다. 설치 후에는 창만 가리는 느낌이 아니라 거실 전체가 훨씬 부드럽고 정돈된 분위기로 바뀌었습니다. 자연광이 원단을 통과했을 때의 느낌과 커튼을 열고 닫았을 때의 공간감도 함께 확인했습니다.
+거실은 설치 전후 변화가 가장 크게 느껴진 공간이었고, 작은방1과 작은방2는 각각 방의 용도와 채광에 맞춰 설치 후 밝기와 비침 정도를 확인했습니다. 안방은 암막 정도와 원단 두께, 하단 길이를 중요하게 봤고, 알파룸은 커튼이 들어가면서 공간 전체가 한층 정돈된 느낌이 들었습니다.
 
-작은방1과 작은방2는 각각 방의 용도와 가구 색에 맞춰 커튼이 어떻게 어울리는지 살펴봤습니다. 같은 집 안에서도 방마다 채광이 달라 실제 설치 후 밝기와 비침 정도를 따로 확인하는 게 좋았습니다.
-
-안방은 특히 암막 정도를 중요하게 봤습니다. 낮에 커튼을 닫아 실제 빛 차단 정도를 확인하고, 원단 두께와 주름, 바닥과의 길이까지 가까이에서 체크했습니다.
-
-알파룸도 설치를 마치고 나니 공간이 한층 더 완성된 느낌이 들었습니다. 작은 공간이라도 커튼이 들어가면 전체 분위기가 생각보다 크게 달라졌습니다.
-
-설치 과정에서 좋았던 점은 ${d.good||'공간별로 설치 전후 차이가 분명했고 전체적인 마감이 깔끔했다는 점입니다.'}
+설치 과정에서 좋았던 점은 ${d.good||'공간별 추천과 전체적인 마감이 깔끔했다는 점입니다.'}
 업체와 기사님 응대는 ${d.service||'설치 과정과 마무리를 차분하게 확인할 수 있었습니다.'}
-${d.bad?`아쉬웠던 점이나 체크할 부분은 ${d.bad}`:''}
+${d.bad?`아쉬웠던 점은 ${d.bad}`:''}
 
-전체적으로 ${d.personal||'거실부터 작은방1, 작은방2, 안방, 알파룸까지 커튼이 모두 설치되고 나니 새집이 한층 더 집다운 분위기로 완성된 느낌이었습니다.'}
+전체적으로 ${d.personal||'5개 공간의 커튼 설치가 끝나고 나니 새집이 한층 더 집다운 분위기로 완성된 느낌이었습니다.'}
 
-커튼은 원단 샘플만 볼 때와 실제 집에 설치했을 때의 느낌이 다를 수 있어서, 설치 전후를 같은 구도로 촬영하고 자연광·암막·주름·하단 길이까지 함께 확인해보는 것을 추천합니다.`)}
-$('copyBtn').onclick=async()=>{await navigator.clipboard.writeText($('draft').value);status('글을 복사했습니다.')}
+커튼은 원단 샘플만 볼 때와 실제 집에 설치했을 때의 느낌이 다를 수 있어서, 설치 전후를 같은 구도로 촬영하고 자연광·암막·주름·하단 길이까지 함께 확인해보는 것을 추천합니다.`)};
+$('copyBtn').onclick=async()=>{try{await navigator.clipboard.writeText($('draft').value);status('글을 복사했습니다.')}catch(e){status('복사가 제한되었습니다.')}};
 $('saveBtn').onclick=save;
-$('resetBtn').onclick=()=>{if(confirm('모든 입력과 사진을 초기화할까요?')){localStorage.removeItem(KEY);location.reload()}}
-$('exportBtn').onclick=()=>{save();let blob=new Blob(['<!doctype html>\n'+document.documentElement.outerHTML],{type:'text/html;charset=utf-8'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='르홈_커튼설치_거실_작은방1_작은방2_안방_알파룸.html';a.click()}
-$('draft').oninput=e=>$('preview').textContent=e.target.value;
-document.addEventListener('input',e=>{if(e.target.id!=='draft')save()});
+$('resetBtn').onclick=()=>{if(confirm('모든 입력과 사진을 초기화할까요?')){localStorage.removeItem(KEY);location.reload()}};
+$('addBottomBtn').onclick=()=>{data.shots.push(newShot());render();save()};
+$('draft').oninput=e=>{$('preview').textContent=e.target.value;save()};
+document.addEventListener('input',e=>{if(e.target.id!=='draft'&&!e.target.closest('#shots'))save()});
+
+function compressImage(dataURL,targetRatio=.20){return new Promise(resolve=>{if(!dataURL){resolve('');return}const img=new Image();img.onload=()=>{const original=Math.max(1,Math.floor((dataURL.length-(dataURL.indexOf(',')+1))*.75)),target=Math.max(20*1024,Math.floor(original*targetRatio));let scale=Math.min(1,Math.sqrt(targetRatio)*1.35),quality=.82,tries=0,best=dataURL;const work=()=>{const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.naturalWidth*scale));c.height=Math.max(1,Math.round(img.naturalHeight*scale));c.getContext('2d',{alpha:false}).drawImage(img,0,0,c.width,c.height);const out=c.toDataURL('image/jpeg',quality);best=out;const bytes=Math.floor((out.length-(out.indexOf(',')+1))*.75);if(bytes<=target||tries>=8||(c.width<600&&c.height<600)){resolve(best);return}tries++;if(quality>.48)quality-=.09;else scale*=.82;setTimeout(work,0)};work()};img.onerror=()=>resolve(dataURL);img.src=dataURL})}
+function applyValues(clone){document.querySelectorAll('input,select,textarea').forEach(src=>{if(!src.id)return;const dst=clone.querySelector('#'+CSS.escape(src.id));if(!dst)return;if(src.tagName==='TEXTAREA')dst.textContent=src.value;else if(src.tagName==='SELECT'){[...dst.options].forEach(o=>o.removeAttribute('selected'));const op=[...dst.options].find(o=>o.value===src.value);if(op)op.setAttribute('selected','selected')}else dst.setAttribute('value',src.value)})}
+function cleanExport(clone){clone.querySelectorAll('.toolbar,.status,.insert-shot,.actions,.drag-handle,.drag-tip,#addBottomBtn').forEach(x=>x.remove());clone.querySelectorAll('.shot').forEach(x=>{x.removeAttribute('draggable');x.removeAttribute('data-id');x.classList.remove('dragging','drag-over')});const sc=clone.querySelector('script');if(sc)sc.remove()}
+async function exportHTML(withPhotos){
+ save();status(withPhotos?'사진을 1/5 용량으로 압축 중…':'사진 제외 HTML 만드는 중…');
+ try{
+  const clone=document.documentElement.cloneNode(true);applyValues(clone);
+  const box=clone.querySelector('#shots');box.innerHTML='';
+  for(let i=0;i<data.shots.length;i++){const s=data.shots[i];let img='';if(withPhotos&&s.img){status(`사진 압축 중 ${i+1}/${data.shots.length}`);img=await compressImage(s.img,.20)}
+   const el=document.createElement('div');el.className='shot';el.innerHTML=`<div class="shot-head"><span>${i+1}. ${esc(s.title)}</span><span class="group-badge">${esc(s.group)}</span></div>${withPhotos&&img?`<div class="photo"><img src="${img}" alt="${esc(s.title)}"></div>`:''}<div class="shot-body"><label style="font-size:12px;font-weight:800">사진별 코멘트</label><div class="voice-ref">${esc(s.memo||'')}</div></div>`;box.appendChild(el)
+  }
+  cleanExport(clone);const out='<!doctype html>\n'+clone.outerHTML,blob=new Blob([out],{type:'text/html;charset=utf-8'}),a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=withPhotos?'르홈_커튼설치_사진포함_1-5압축.html':'르홈_커튼설치_사진제외.html';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);status('HTML 저장 완료 ✓')
+ }catch(e){console.error(e);alert('HTML 내보내기에 실패했습니다.');status('내보내기 실패')}
+}
+$('exportBtn').onclick=()=>exportHTML(true);
+$('exportNoPhotoBtn').onclick=()=>exportHTML(false);
+
 load();render();$('preview').textContent=$('draft').value||'생성된 글이 여기에 표시됩니다.';
 })();
 </script>
